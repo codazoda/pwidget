@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+ 
+<head>
+ 
+	<title>Widget</title>
+ 
+	<!-- JavaScript -->
+	<script type="text/javascript">
+		// Put code here or set the src attribute
+	</script>
+ 
+	<!-- CSS -->
+	<style type="text/css">
+	<!--
+ 
+		body { background-color: white; margin: 0; padding: 0; font-family: sans-serif; font-size: 12px; }
+		p { margin-bottom: 10px; }
+		.estimate { color: silver; font-weight: bold; float: left; margin-right: 5px; width: 15px; }
+		.name { float: left; }
+		.strike { text-decoration: line-through; }
+		.line { border-top: 1px solid white; border-bottom: 1px solid silver; padding-top: 5px; padding-bottom: 5px; background-color: #f4f4f4; height: auto; }
+		.arrow { color: silver; float: left; width: 20px; margin-left: 5px; }
+		.priority { float: left; width: 20px; }
+		.done { background-color: #daebcf; }
+		.started { background-color: #f3f3d1; }
+		.labels { color: green; font-size: 0.85em; font-weight: bold; }
+		.owned_by { color: darkblue; }
+		a { color: black; text-decoration: none; }
+ 
+	-->
+	</style>
+ 
+</head>
+ 
+<body>
+ 
+	<? foreach($stories as $s): ?>
+		<div class="line <? if (in_array($s['current_state'], $done)): ?> done<? endif; ?> <? if ($s['current_state'] == 'started'): ?> started<? endif; ?>">
+			<div class="arrow">
+				<img src="https://cdn2-pivotaltracker.pantherssl.com/images/v7/application/stories_view/icons/story_collapsed.png">
+			</div>
+			<? if ($s['priority'] != ''): ?>
+			<div class="priority">
+				<? echo $s['priority']; ?>&nbsp;
+			</div>
+			<? endif; ?>
+			<div class="estimate">
+				<? echo $s['estimate']; ?>&nbsp;
+			</div>
+			<div class="name<? if (in_array($s['current_state'], array('finished', 'delivered', 'accepted'))): ?> strike<? endif; ?>">
+				<span class="labels"><?echo $s['labels']; ?></span> 
+				<a href="https://www.pivotaltracker.com/story/show/<? echo $s['id']; ?>" target="<? echo $target; ?>">
+					<? echo $s['name']; ?> 
+				</a>
+				<!-- <? if ($s['owned_by']): ?>(<span class="owned_by"><? echo $s['owned_by']; ?>)</span><? endif; ?> -->
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+	<? endforeach; ?>
+ 
+</body>
+ 
+</html>
