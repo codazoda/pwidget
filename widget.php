@@ -68,7 +68,7 @@
 	 */
 	
 	// Grab all projects by default or the specified list
-	if ($_GET['projects'] == '') {
+	if ($_GET['project'] == '') {
 		// Get a list of all the users projects
 		$projectObject = $pivotal->getProjects();
 		foreach($projectObject->project as $pro) {
@@ -78,7 +78,7 @@
 		}
 	} else {
 		// Split a comma seperated list
-		$projList = split(',', $_GET['projects']);
+		$projList = split(',', $_GET['project']);
 		foreach($projList as $item) {
 			$projects[] = array(
 				'id' => $item
@@ -95,7 +95,7 @@
 	 * everything using a filter of
 	 * "state:feature,bug,chore,release".
 	 *
-	 * filter=mywork:jrd, state:bug
+	 * filter=mywork:jrd state:bug
 	 */
 
 
@@ -120,7 +120,21 @@
 		$filter = 'state:feature,bug,chore,release';
 	}
 
-// TODO: Create an sqlite table
+	// Create an SQLite DB and table in memory
+	$db = sqlite_open(':memory:', 0666, $error);
+	$create = 'CREATE TABLE stories '
+			. '('
+	        . ' id INTEGER,'
+	        . ' current_state TEXT,'
+	        . ' estimate INTEGER,'
+	        . ' name TEXT,'
+	        . ' created_at TEXT,'
+	        . ' priority TEXT,'
+	        . ' labels TEXT,'
+	        . ' owned_by TEXT'
+	        . ')';
+	$result = sqlite_exec($db, $create);
+	$result = sqlite_exec($db, 'BEGIN TRANSACTION');
 	
 	// Loop through the projects
 	foreach ($projects as $p) {
@@ -146,21 +160,27 @@
 					}
 				}
 			}
-// TODO: Write the data to the sqlite table			
-			// Add this story to an array
-			$stories[] = array(
-				'id' => (int)$p->id,
-				'current_state' => (string)$p->current_state,
-				'estimate' => (int)$p->estimate,
-				'name' => (string)$p->name,
-				'created_at' => (string)$p->created_at,
-				'priority' => $priority,
-				'labels' => $labels,
-				'owned_by' => (string)$p->owned_by
-			);
+
+			// Write the data to the sqlite table
+			$insert = 'INSERT INTO stories VALUES '
+					. '('
+					. " '{$p->id}',"
+					. " '{$p->current_state}',"
+					. " '{$p->estimate}',"
+					. " '{$p->name}',"
+					. " '{$p->created_at}',"
+					. " '$priority',"
+					. " '$labels',"
+					. " '{$p->owned_by}'"
+					. ')';
+			$result = sqlite_exec($db, $insert);
+
 		}
 	
-	};
+	}
+	
+	// End the transaction and write the data
+	$result = sqlite_exec($db, 'COMMIT TRANSACTION');
 	
 	/**
 	 * ===== Sorting =====
@@ -169,36 +189,19 @@
 	 * or more custom columns. By default the widget
 	 * sorts by current_state then by created_at.
 	 *
-	 * filter=current_state,owned_by
+	 * sort=current_state,priority
 	 */
 	
-	// Make a list of the columns to sort on
-	if ($_GET['sort'] == '') {
-		$_GET['sort'] = 'current_state,created_at';
+	// Setup the order by
+	if ($_GET['sort']) {
+		$order = 'ORDER BY ' . $_GET['sort'];
+	} else {
+		$order = 'ORDER BY current_state,created_at';
 	}
 	
-	// Split the sort list
-	$sortList = split(',', $_GET['sort']);
-
-// TODO: Setup the sqlite ORDER BY clause
-// TODO: Query the data from sqlite
-
-	// Loop through the stories creating lists of columns to sort on later
-	foreach($stories as $s) {
-		foreach ($sortList as $column) {
-			$sortCol[] = $s[$column];
-		}
-	}
-	
-	// Sort the array on the specified columns
-	/*
-	foreach ($sortCol as $column) {
-		$sortArgs[] = &$column;
-		$sortArgs[] = 'SORT_ASC';
-	}
-	$sortArgs[] = &$stories;
-	call_user_func_array('array_multisort', $sortArgs);
-	*/
+	// Query the data from sqlite
+	$query = 'SELECT * FROM stories ' . $order;
+	$stories = sqlite_array_query($db, $query, SQLITE_ASSOC);
 	
 	// Include the view
 	include "widget.phtml";

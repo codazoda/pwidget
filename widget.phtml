@@ -2,7 +2,7 @@
  
 <head>
  
-	<title>Widget</title>
+	<title>pWidget</title>
  
 	<!-- JavaScript -->
 	<script type="text/javascript">
@@ -19,7 +19,7 @@
 		.name { float: left; }
 		.strike { text-decoration: line-through; }
 		.line { border-top: 1px solid white; border-bottom: 1px solid silver; padding-top: 5px; padding-bottom: 5px; background-color: #f4f4f4; height: auto; }
-		.arrow { color: silver; float: left; width: 20px; margin-left: 5px; }
+		.arrow { color: grey; float: left; width: 20px; margin-left: 5px; }
 		.priority { float: left; width: 20px; }
 		.done { background-color: #daebcf; }
 		.started { background-color: #f3f3d1; }
@@ -37,7 +37,7 @@
 	<? foreach($stories as $s): ?>
 		<div class="line <? if (in_array($s['current_state'], $done)): ?> done<? endif; ?> <? if ($s['current_state'] == 'started'): ?> started<? endif; ?>">
 			<div class="arrow">
-				<img src="https://cdn2-pivotaltracker.pantherssl.com/images/v7/application/stories_view/icons/story_collapsed.png">
+				>
 			</div>
 			<? if ($s['priority'] != ''): ?>
 			<div class="priority">
