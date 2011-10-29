@@ -7,6 +7,18 @@
 	 * results into any web page, dashboard, Google Gadget, 
 	 * or anywhere else you can put an iframe.
 	 */
+	 
+	/**
+	 * ===== Security =====
+	 *
+	 * pWidget is hosted on a server that uses SSL.  Data,
+	 * however, is passed to pWidget
+	 * via the query string.  Web browsers encrypt that
+	 * data in transit.  Any user who can see the page with
+	 * pWidget embedded in it, however, can see the full
+	 * query string.  That includes your username and 
+	 * password combination or your API key.
+	 */
 
 	// Include the file that defines the class
 	require '../pivotal_class/pivotal.php';
@@ -37,7 +49,7 @@
 	} else {
 		$pivotal->token = $_GET['token'];
 	}
-	
+
 	/**
 	 * ===== Link Target =====
 	 *
@@ -204,7 +216,7 @@
 	$stories = sqlite_array_query($db, $query, SQLITE_ASSOC);
 	
 	// Include the view
-	include "widget.phtml";
+	require "index.phtml";
 
 	/**
 	 * ===== Required Fields =====
