@@ -19,12 +19,22 @@
 	 * query string.  That includes your username and 
 	 * password combination or your API key.
 	 */
-
+	 
 	// Include the file that defines the class
 	require '../pivotal_class/pivotal.php';
+	
+	// If we are loading data
+	if ($_GET['load'] != '') {
+		load($_GET['load']);
+	}
 
 	// Verify all of the fields
 	validate();
+	
+	// If the save flag was set
+	if (substr(strtolower($_GET['save']), 0, 1) == 'y') {
+		save();
+	}
 	
 	// Setup an array of items that are done
 	$done = array('finished', 'delivered', 'accepted');
@@ -247,6 +257,28 @@
 			}
 			exit;
 		}
+	}
+	
+	// Save the options and redirect
+	function save() {
+		// Grab the get variables
+		$data = $_GET;
+		// Remove the save option
+		unset($data['save']);
+		// JSON encode the data
+		$data = json_encode($data);
+		// Generate a random filename code
+		$file = md5(mt_rand() . time());
+		// Save the data to a file
+		file_put_contents("data/$file", $data);
+		// Redirect the user
+		header("Location: ?load=$file");
+	}
+	
+	// Load a saved query string
+	function load($file) {
+		$_GET = json_decode(file_get_contents("data/$file"), true);
+		$_GET['load'] = $file;
 	}
 
 ?>
