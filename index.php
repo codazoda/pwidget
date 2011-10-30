@@ -129,7 +129,7 @@
 	// Set a default filter
 	$filter = $_GET['filter'];
 	if ($filter == '') {
-		$filter = 'state:feature,bug,chore,release';
+		$filter = 'type:feature,bug,chore,release';
 	}
 
 	// Create an SQLite DB and table in memory
@@ -143,7 +143,8 @@
 	        . ' created_at TEXT,'
 	        . ' priority TEXT,'
 	        . ' labels TEXT,'
-	        . ' owned_by TEXT'
+	        . ' owned_by TEXT,'
+	        . ' story_type TEXT'
 	        . ')';
 	$result = sqlite_exec($db, $create);
 	$result = sqlite_exec($db, 'BEGIN TRANSACTION');
@@ -183,7 +184,8 @@
 					. " '{$p->created_at}',"
 					. " '$priority',"
 					. " '$labels',"
-					. " '{$p->owned_by}'"
+					. " '{$p->owned_by}',"
+					. " '{$p->story_type}'"
 					. ')';
 			$result = sqlite_exec($db, $insert);
 
