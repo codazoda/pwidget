@@ -133,7 +133,7 @@
 	 * If a story doesn't have a label of 'A' or 'B' then 
 	 * that story will default to a 'C' priority.
 	 *
-	 * priority=1
+	 * priority=y
 	 */
 	
 	// Set a default filter
@@ -170,7 +170,7 @@
 			// Space seperate the labels
 			$labels = str_replace(',', ', ', (string)$p->labels);
 			// If priority was specified, set a priority for this item
-			if ($_GET['priority']) {
+			if (substr(strtolower($_GET['priority']), 0, 1) == 'y') {
 				$labelList = split(',', (string)$p->labels);
 				if (is_array($labelList)) {
 					// See if a, b, or c exists in the list of labels
@@ -211,7 +211,7 @@
 	 *
 	 * You can sort the resulting list of stories by one
 	 * or more custom columns. By default the widget
-	 * sorts by current_state then by created_at.
+	 * sorts by current_state.
 	 *
 	 * sort=current_state,priority
 	 */
@@ -220,8 +220,11 @@
 	if ($_GET['sort']) {
 		$order = 'ORDER BY ' . $_GET['sort'];
 	} else {
-		$order = 'ORDER BY current_state,created_at';
+		$order = 'ORDER BY current_state';
 	}
+	
+	// Always order by ROWID also
+	$order .= ',ROWID';
 	
 	// Query the data from sqlite
 	$query = 'SELECT * FROM stories ' . $order;
