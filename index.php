@@ -136,10 +136,10 @@
 	 * priority=y
 	 */
 	
-	// Set a default filter
+	// Set a default filter; includes everything but unscheduled
 	$filter = $_GET['filter'];
 	if ($filter == '') {
-		$filter = 'type:feature,bug,chore,release';
+		$filter = 'state:unstarted,started,finished,delivered,accepted,rejected';
 	}
 
 	// Create an SQLite DB and table in memory
@@ -163,7 +163,7 @@
 	foreach ($projects as $p) {
 
 		// Grab all the matching stories from this project
-		$pull = $pivotal->getStories($p['id'], $_GET['filter']);
+		$pull = $pivotal->getStories($p['id'], $filter);
 
 		// Loop through the data building an array for our view
 		foreach($pull->story as $p) {
@@ -258,6 +258,10 @@
 			foreach($error as $msg) {
 				echo $msg . '<br>';
 			}
+			echo "<br>\n";
+			$readme = file_get_contents('readme.txt');
+			$readme = str_replace("\n", "<br>\n", $readme);
+			echo $readme;
 			exit;
 		}
 	}
