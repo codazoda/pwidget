@@ -11,7 +11,7 @@ username=johndoe&password=foobar
 
 Here's an example of a minimal call to pWidget.
 
-http://sslcertified.com/pwidget/?username=joel&password=secret
+http://sslcertified.com/pwidget/app/?username=joel&password=secret
 
 ===== Link Target =====
 
