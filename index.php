@@ -284,8 +284,9 @@
 	
 	// Load a saved query string
 	function load($file) {
-		$_GET = json_decode(file_get_contents("data/$file"), true);
-		$_GET['load'] = $file;
+		$string = $_GET;
+		$file = json_decode(file_get_contents("data/$file"), true);
+		$_GET = array_merge($file, $string);
 	}
 
 ?>
