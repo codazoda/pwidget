@@ -1,1 +1,1 @@
-scp index.php index.phtml freiki@freiki.com:/www/htdocs/sslcertified/pwidget/app/v0/
+scp index.php index.phtml readme.txt freiki@freiki.com:/www/htdocs/sslcertified/pwidget/app/v0/
