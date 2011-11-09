@@ -20,8 +20,20 @@
 	 * password combination or your API key.
 	 */
 	 
-	// Include the file that defines the class
-	require '../pivotal_class/pivotal.php';
+	// Setup the possible locations for the library
+	$libraryPath = array (
+		'../pivotal_class/',
+		'../../pivotal_class/'
+	); 
+	
+	// Include the Pivotal library from possible locations
+	foreach($libraryPath as $path) {
+		$file = $path . 'pivotal.php';
+		if (file_exists($file)) {
+			include_once $file;
+			break;
+		}
+	}
 	
 	// If we are loading data
 	if ($_GET['load'] != '') {
