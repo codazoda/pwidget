@@ -37,6 +37,12 @@ You can opt to include a 'priority' column into the widget ouput.  This is a fea
 
 priority=y
 
+===== Labels =====
+
+You can supress the labels from being displayed in the widget by adding the labels option.
+
+labels=n
+
 ===== Story Owner =====
 
 By default each story shows the full owner name next to it.  The API returns the full owner name and not their initials, so that full name is displayed currently.  You can turn it off using the owner option.
