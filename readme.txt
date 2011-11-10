@@ -37,6 +37,12 @@ You can opt to include a 'priority' column into the widget ouput.  This is a fea
 
 priority=y
 
+===== Story Owner =====
+
+By default each story shows the full owner name next to it.  The API returns the full owner name and not their initials, so that full name is displayed currently.  You can turn it off using the owner option.
+
+owner=n
+
 ===== Sorting =====
 
 You can sort the resulting list of stories by one or more custom columns. By default the widget sorts by current_state.

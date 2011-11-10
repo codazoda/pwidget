@@ -195,6 +195,10 @@
 					}
 				}
 			}
+			// Unset owned_by
+			if (substr(strtolower($_GET['owner']), 0, 1) == 'n') {
+				unset($p->owned_by);
+			}
 
 			// Write the data to the sqlite table
 			$insert = 'INSERT INTO stories VALUES '
