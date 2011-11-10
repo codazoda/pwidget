@@ -199,6 +199,10 @@
 			if (substr(strtolower($_GET['owner']), 0, 1) == 'n') {
 				unset($p->owned_by);
 			}
+			// Unset labels
+			if (substr(strtolower($_GET['labels']), 0, 1) == 'n') {
+				unset($labels);
+			}
 
 			// Write the data to the sqlite table
 			$insert = 'INSERT INTO stories VALUES '
