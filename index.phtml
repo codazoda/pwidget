@@ -30,6 +30,7 @@
 		.owned_by { color: darkblue; }
 		a { color: black; text-decoration: none; }
 		.save { background-color: silver; color: grey; border-top: 1px solid #ececec; border-bottom: 1px solid #888888; }
+		.header { background-color: #333333; color: white; font-weight: bold; padding: .75em 0 .75em 0; border: 0; }
 
 	-->
 	</style>
@@ -37,7 +38,10 @@
 </head>
  
 <body>
- 
+
+	<div class="line header">
+		<p style="text-align: center; margin: 0;">pWidget</p>
+	</div> 
 	<? foreach($stories as $s): ?>
 		<div class="line <? if ($s['story_type'] == 'release'): ?>release<? elseif (in_array($s['current_state'], $done)): ?>done<? endif; ?> <? if ($s['current_state'] == 'started'): ?> started<? endif; ?>">
 			<div class="arrow">
