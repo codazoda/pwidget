@@ -55,6 +55,12 @@ You can sort the resulting list of stories by one or more custom columns. By def
 
 sort=current_state,priority
 
+===== Title =====
+
+By default the widget has a title of 'pWidget' but you can change the title by adding the title attribute.  Setting the title to 'n' will hide the title completely.
+
+title=n
+
 ===== Security =====
 
 pWidget is hosted on a server that uses SSL.  Data, however, is passed to pWidget via the query string.  Web browsers encrypt that data in transit but any user who can see the page with pWidget embedded in it can see the full query string including your username and password combination or your API key.  Click the "Save and Secure" link to generate a saved result that does not include private details in the query string.  You can then append additional paramaters on your query string to overwrite the saved defaults.  It's useful, for example, to save a default widget with just your username/password combination.  Then load that and append additional options.

@@ -250,6 +250,13 @@
 	$query = 'SELECT * FROM stories ' . $order;
 	$stories = sqlite_array_query($db, $query, SQLITE_ASSOC);
 	
+	// Set the title
+	if ($_GET['title']) {
+		$title = $_GET['title'];
+	} else {
+		$title = 'pWidget';
+	}
+	
 	// Include the view
 	require "index.phtml";
 

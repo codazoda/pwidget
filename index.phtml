@@ -39,9 +39,11 @@
  
 <body>
 
+	<? if ($title != 'n'): ?>
 	<div class="line header">
-		<p style="text-align: center; margin: 0;">pWidget</p>
+		<p style="text-align: center; margin: 0;"><? echo $title; ?></p>
 	</div> 
+	<? endif; ?>
 	<? foreach($stories as $s): ?>
 		<div class="line <? if ($s['story_type'] == 'release'): ?>release<? elseif (in_array($s['current_state'], $done)): ?>done<? endif; ?> <? if ($s['current_state'] == 'started'): ?> started<? endif; ?>">
 			<div class="arrow">
