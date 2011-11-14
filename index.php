@@ -20,6 +20,14 @@
 	 * password combination or your API key.
 	 */
 	 
+	// Set the default to 3 columns wide
+	$cols = 3;
+	
+	// Add another column if we have priority turned on
+	if (substr(strtolower($_GET['priority']), 0, 1) == 'y') {
+		$cols = $cols + 1;
+	}
+	
 	// Setup the possible locations for the library
 	$libraryPath = array (
 		'../pivotal_class/',

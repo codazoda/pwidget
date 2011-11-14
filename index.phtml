@@ -16,11 +16,11 @@
 		body { background-color: white; margin: 0; padding: 0; font-family: Arial, Verdana, sans-serif; font-size: 12px; }
 		p { margin-bottom: 10px; }
 		.estimate { color: silver; font-weight: bold; float: left; margin-right: 5px; width: 15px; }
-		.name { float: left; width: 80%; }
+		.name { float: left; width: <? if ($cols == 4): ?>70%<? else: ?>80%<? endif; ?>; }
 		.strike { text-decoration: line-through; }
 		.line { border-top: 1px solid white; border-bottom: 1px solid #dddddd; padding-top: 5px; padding-bottom: 5px; background-color: #f4f4f4; height: auto; }
 		.arrow { color: grey; float: left; width: 10%; text-align: center; }
-		.priority { float: left; width: 10%; }
+		.priority { float: left; width: 10%; text-align: center; }
 		.done { background-color: #daebcf; border-top: 1px solid #eefce2; border-bottom: 1px solid #c3d5b4; }
 		.started { background-color: #f3f3d1; }
 		.release { background-color: #407aa5; border-top: 1px solid #5982a7; border-bottom: 1px solid #306494; }
