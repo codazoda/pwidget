@@ -67,6 +67,10 @@ pWidget is hosted on a server that uses SSL.  Data, however, is passed to pWidge
 
 http://sslcertified.com/pwidget/app/?load=0b61f91e94fd41425820847ab0dcdc69&filter=mywork:jrd
 
+===== Cross Domain iFrames =====
+
+In order to target one iFrame from another the page that includes the iframes and the iframe with the link must exist on the same domain.  This isn't possible when using pWidget since it is hosted on sslceritifed.com and you'll be including it into a page that is not.  As a result all links will open in new windows.  One possible work around is to request the pWidget page using a programming lanuage and then include it's results into a DIV on the page.
+
 ===== Support =====
 
 For questions or comments, please email joel@joeldare.com.
