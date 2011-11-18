@@ -97,7 +97,24 @@
 	} else {
 		$target = $_GET['target'];
 	}
-	
+
+	/**
+	 * ===== Refresh Rate =====
+	 *
+	 * You can specify a refresh rate for the page.
+	 * By default the refresh is 0.  The refresh rate
+	 * is in seconds with a minimum of 15 seconds.
+	 *
+	 * refresh=30
+	 */
+	 
+	// Set the link target variable
+	if ($_GET['refresh'] >= 15) {
+		$refresh = intval($_GET['refresh']);
+	} else {
+		$refresh = 0;
+	}
+
 	/**
 	 * ===== Project(s) =====
 	 *
