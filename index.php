@@ -180,7 +180,8 @@
 	}
 
 	// Create an SQLite DB and table in memory
-	$db = sqlite_open(':memory:', 0666, $error);
+	$sqlite = new SQLite3(':memory:');
+	//$sqlite->open(':memory:');
 	$create = 'CREATE TABLE stories '
 			. '('
 	        . ' id INTEGER,'
@@ -193,8 +194,8 @@
 	        . ' owned_by TEXT,'
 	        . ' story_type TEXT'
 	        . ')';
-	$result = sqlite_exec($db, $create);
-	$result = sqlite_exec($db, 'BEGIN TRANSACTION');
+	$sqlite->exec($create);
+	$sqlite->exec('BEGIN TRANSACTION');
 	
 	// Loop through the projects
 	foreach ($projects as $p) {
@@ -242,14 +243,14 @@
 					. " '{$p->owned_by}',"
 					. " '{$p->story_type}'"
 					. ')';
-			$result = sqlite_exec($db, $insert);
+			$sqlite->exec($insert);
 
 		}
 	
 	}
 	
 	// End the transaction and write the data
-	$result = sqlite_exec($db, 'COMMIT TRANSACTION');
+	$sqlite->exec('COMMIT TRANSACTION');
 	
 	/**
 	 * ===== Sorting =====
@@ -273,7 +274,10 @@
 	
 	// Query the data from sqlite
 	$query = 'SELECT * FROM stories ' . $order;
-	$stories = sqlite_array_query($db, $query, SQLITE_ASSOC);
+	$result = $sqlite->query($query);
+	while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+		$stories[] = $row;
+	}
 	
 	// Set the title
 	if ($_GET['title']) {
