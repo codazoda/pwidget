@@ -47,7 +47,6 @@
 	if ($_GET['load'] != '') {
 		load($_GET['load']);
 	}
-
 	// Verify all of the fields
 	validate();
 	
@@ -79,6 +78,9 @@
 	} else {
 		$pivotal->token = $_GET['token'];
 	}
+
+	// Log this impression
+	logImpression($pivotal->token);
 
 	/**
 	 * ===== Link Target =====
@@ -181,7 +183,6 @@
 
 	// Create an SQLite DB and table in memory
 	$sqlite = new SQLite3(':memory:');
-	//$sqlite->open(':memory:');
 	$create = 'CREATE TABLE stories '
 			. '('
 	        . ' id INTEGER,'
@@ -343,6 +344,24 @@
 		$string = $_GET;
 		$file = json_decode(file_get_contents("data/$file"), true);
 		$_GET = array_merge($file, $string);
+	}
+	
+	// Log an impression
+	function logImpression($token) {
+		$date = date('Y-m-d');
+		// Open the stats database
+		$sqlite = new SQLite3('pwidget.sqlite');
+		// Query for the existing count
+		$select = "SELECT count FROM stats WHERE api_key = '$token}' AND date = '$date'";
+		$result = $sqlite->query($select);
+		$row = $result->fetchArray(SQLITE3_ASSOC);
+		// Add one to the count
+		$newCount = $row['count'] + 1;
+		// Write the new record
+		$insert = "INSERT OR REPLACE INTO stats (api_key, date, count) VALUES ('$token}', '$date', $newCount)";
+		$sqlite->exec($insert);
+		// Close the stats database
+		$sqlite->close();
 	}
 
 ?>
