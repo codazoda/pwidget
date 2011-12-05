@@ -234,18 +234,17 @@
 			// Write the data to the sqlite table
 			$insert = 'INSERT INTO stories VALUES '
 					. '('
-					. " '{$p->id}',"
-					. " '{$p->current_state}',"
-					. " '{$p->estimate}',"
-					. " '{$p->name}',"
-					. " '{$p->created_at}',"
-					. " '$priority',"
-					. " '$labels',"
-					. " '{$p->owned_by}',"
-					. " '{$p->story_type}'"
+					. " '" . str_replace('\'', '\'\'', $p->id) . "',"
+					. " '" . str_replace('\'', '\'\'', $p->current_state) . "',"
+					. " '" . str_replace('\'', '\'\'', $p->estimate) . "',"
+					. " '" . str_replace('\'', '\'\'', $p->name) . "',"
+					. " '" . str_replace('\'', '\'\'', $p->created_at) . "',"
+					. " '" . str_replace('\'', '\'\'', $priority) . "',"
+					. " '" . str_replace('\'', '\'\'', $labels) . "',"
+					. " '" . str_replace('\'', '\'\'', $p->owned_by) . "',"
+					. " '" . str_replace('\'', '\'\'', $p->story_type) . "'"
 					. ')';
 			$sqlite->exec($insert);
-
 		}
 	
 	}
