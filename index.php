@@ -305,6 +305,13 @@
 	} else {
 		$title = 'pWidget';
 	}
+
+	// If the save tag should be shown
+	if (isset($_GET['load']) || $_GET['save'] == 'n') {
+		$save = false;
+	} else {
+		$save = true;
+	}
 	
 	// Include the view
 	require "index.phtml";
@@ -378,7 +385,7 @@
 		$newCount = $row['count'] + 1;
 		// Write the new record
 		$insert = "INSERT OR REPLACE INTO stats (api_key, date, count) VALUES ('$token}', '$date', $newCount)";
-		$sqlite->exec($insert);
+		@$sqlite->exec($insert);
 		// Close the stats database
 		$sqlite->close();
 	}

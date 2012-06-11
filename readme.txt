@@ -63,6 +63,12 @@ By default the widget has a title of 'pWidget' but you can change the title by a
 
 title=n
 
+===== Save =====
+
+By default the widget has a save line at the bottom if you haven't loaded it from a saved URL.  Setting it to 'n' will force this to turn off.
+
+save=n
+
 ===== Refresh =====
 
 You can specify a refresh rate for the widget frame. By default the refresh is 0.  The refresh rate is in seconds with a minimum of 15 seconds.
