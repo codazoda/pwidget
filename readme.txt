@@ -2,6 +2,8 @@
 
 pWidget is a widget that lets you embed Pivotal Tracker search results into any web page, dashboard, Google Gadget, or anywhere else you can put an iframe.
 
+The pWidget Home Page is available at https://www.sslcertified.com/pwidget.
+
 ===== Required Fields =====
 
 A minimum widget call requires access credentials as part of the query string.  Either an API token or a username and password combination.
