@@ -83,6 +83,26 @@
 	logImpression($pivotal->token);
 
 	/**
+	 * ===== CSS Style =====
+	 *
+	 * You can specify a special css stylesheet for the page.
+	 * By default the style is 'default'.  You can change this to 
+	 * the name of another css file.  You can specify one of the
+	 * defaults that are provided with pWidget or you can specify 
+	 * a full URL to an external CSS stylesheet (without the 
+	 * .css extension).
+	 *
+	 * style=default
+	 */
+	 
+	// Set the CSS style variable
+	if ($_GET['style'] == '') {
+		$style = 'default';
+	} else {
+		$style = $_GET['style'];
+	}
+
+	/**
 	 * ===== Link Target =====
 	 *
 	 * You can specify a target for any links on the page.
@@ -139,7 +159,7 @@
 		}
 	} else {
 		// Split a comma seperated list
-		$projList = split(',', $_GET['project']);
+		$projList = explode(',', $_GET['project']);
 		foreach($projList as $item) {
 			$projects[] = array(
 				'id' => $item
