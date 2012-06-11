@@ -1,0 +1,103 @@
+body { 
+	background-color: white; 
+	margin: 0;
+	padding: 0; 
+	font-family: Arial, Verdana, sans-serif; font-size: 12px; 
+}
+
+p { 
+	margin-bottom: 10px; 
+}
+
+.estimate { 
+	color: silver; 
+	font-weight: bold; 
+	float: left; 
+	margin-right: 5px; 
+	width: 15px; 
+}
+		
+.name { 
+	float: left;
+	width: 80%; /* This can be overriden by index.phtml. */
+}
+		
+.strike { 
+	text-decoration: line-through; 
+}
+		
+.line { 
+	border-top: 1px solid white; 
+	border-bottom: 1px solid #dddddd; 
+	padding-top: 5px; 
+	padding-bottom: 5px; 
+	background-color: #f4f4f4; 
+	height: auto; 
+}
+		
+.arrow { 
+	color: grey; 
+	float: left; 
+	width: 10%; 
+	text-align: center; 
+}
+		
+.priority { 
+	float: left; 
+	width: 10%; 
+	text-align: center; 
+}
+		
+.done { 
+	background-color: #daebcf; 
+	border-top: 1px solid #eefce2; 
+	border-bottom: 1px solid #c3d5b4; 
+}
+		
+.started { 
+	background-color: #f3f3d1; 
+}
+		
+.release { 
+	background-color: #407aa5; 
+	border-top: 1px solid #5982a7; 
+	border-bottom: 1px solid #306494; 
+}
+		
+.release a { 
+	color: white !important; 
+}
+		
+.release .arrow { 
+	color: silver; 
+}
+
+.labels { 
+	color: green; 
+	font-size: 0.85em; 
+	font-weight: bold; 
+}
+
+.owned_by { 
+	color: darkblue; 
+}
+
+a { 
+	color: black; 
+	text-decoration: none; 
+}
+
+.save { 
+	background-color: silver; 
+	color: grey; 
+	border-top: 1px solid #ececec; 
+	border-bottom: 1px solid #888888; 
+}
+	
+.header { 
+	background-color: #333333; 
+	color: white; 
+	font-weight: bold; 
+	padding: .75em 0 .75em 0; 
+	border: 0; 
+}
