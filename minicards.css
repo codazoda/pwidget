@@ -3,6 +3,7 @@ body {
 	margin: 0;
 	padding: 0; 
 	font-family: Arial, Verdana, sans-serif; font-size: 10px; 
+	-webkit-print-color-adjust: exact;
 }
 
 p { 
@@ -22,6 +23,8 @@ p {
 .name { 
 	float: left;
 	margin: 0 5px 0 5px;
+	overflow: hidden;
+	height: 78px;
 }
 		
 .strike { 
@@ -40,6 +43,7 @@ p {
 	padding-top: 5px; 
 	padding-bottom: 5px; 
 	background-color: #f4f4f4; 
+	page-break-inside: avoid;
 }
 		
 .arrow { 
@@ -81,9 +85,13 @@ p {
 }
 
 .labels { 
+	display: block;
+	position: absolute;
 	color: green; 
 	font-size: 0.85em; 
 	font-weight: bold; 
+	bottom: 5px;
+	width: 125px;
 }
 
 .owned_by { 
