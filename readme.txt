@@ -53,7 +53,7 @@ owner=n
 
 ===== Sorting =====
 
-You can sort the resulting list of stories by one or more custom columns. By default the widget sorts by current_state.
+You can sort the resulting list of stories by one or more custom columns. By default the widget sorts by current_state.  Sort columns include id, current_state, estimate, name, created_at, priority, labels, owned_by, and story_type.
 
 sort=current_state,priority
 
