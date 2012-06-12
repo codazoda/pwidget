@@ -34,9 +34,10 @@ p {
 .line {
 	position: relative;
 	float: left;
-	width: 150px;
+	/* width: 148px; */
+	width: 15.773%;
 	height: 100px;
-	margin: 5px 5px 5px 0;
+	margin: 0.5%;
 	overflow: hidden;
 	border-top: 1px solid white; 
 	border-bottom: 1px solid #dddddd; 
@@ -111,9 +112,16 @@ a {
 }
 	
 .header { 
-	background-color: #333333; 
-	color: white; 
+	background-color: silver; 
+	color: black; 
 	font-weight: bold; 
+	font-size: 1.5em;
+	line-height: 1.5em;
 	padding: .75em 0 .75em 0; 
 	border: 0; 
+	width: 80%;
+	margin-right: 10%;
+	margin-left: 10%;
+	margin-bottom: 5%;
+	height: 1.5em;
 }
